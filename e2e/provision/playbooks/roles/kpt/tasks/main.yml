@@ -40,6 +40,8 @@
 # TODO: Improve the render function
 - name: Render package
   become: true
+  environment:
+    KPT_FN_RUNTIME: "{{ container_engine }}"
   kpt:
     pkg_path: "{{ workdir }}"
     command: fn-render

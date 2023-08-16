@@ -33,8 +33,15 @@
             groups: docker
             append: true
     - name: Install podman binaries
-      ansible.builtin.include_role:
-        name: andrewrothstein.podman
+      become: true
+      block:
+        - name: invoke podman install
+          ansible.builtin.include_role:
+            name: andrewrothstein.podman
+        - name: expose podman socket
+          ansible.builtin.systemd:
+            state: started
+            name: podman.socket
       when: container_engine == "podman"
     - name: Install KinD command-line
       ansible.builtin.include_role:
