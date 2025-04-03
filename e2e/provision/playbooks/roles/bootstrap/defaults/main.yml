@@ -84,6 +84,7 @@ cluster_api:
       - capi-kubeadm-control-plane-system
       - capi-kubeadm-bootstrap-system
       - capd-system
+      - capm3-system
   kpt:
     packages:
       - repo_uri: "{{ nephio_catalog_repo_uri }}"
@@ -98,6 +99,11 @@ cluster_api:
         poll: 5
       - repo_uri: "{{ nephio_catalog_repo_uri }}"
         pkg: infra/capi/cluster-capi-kind-docker-templates
+        version: "{{ nephio_catalog_revision }}"
+        async: 1500
+        poll: 0
+      - repo_uri: "{{ nephio_catalog_repo_uri }}"
+        pkg: infra/capi/cluster-capi-infrastructure-metal3
         version: "{{ nephio_catalog_revision }}"
         async: 1500
         poll: 0
